@@ -1,0 +1,26 @@
+name: build c file
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: gcc build
+        run: gcc jordan.c -o dist/jordan
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jordan
+          path: dist/jordan
